@@ -1,5 +1,5 @@
 jQuery(document).ready(function() {
-  jQuery('.entry-share-btns a').on('click', function(e) {
+  jQuery('.entry-share a').on('click', function(e) {
     e.preventDefault();
     var link = jQuery(this).attr('href');
     var width = 840;
