@@ -5,8 +5,8 @@ namespace Roots\ShareButtons;
 /*
 Plugin Name:   Roots Share Buttons
 Plugin URI:    https://roots.io/plugins/share-buttons/
-Description:   Add lightweight social sharing buttons with optional share counts.
-Version:       1.1.0
+Description:   Lightweight social sharing buttons
+Version:       1.2.0
 Author:        Ben Word
 Author URI:    https://roots.io/
 License:       MIT License
@@ -19,7 +19,6 @@ define('ROOTS_SHARE_FOLDER', __FILE__);
 require_once(__DIR__ . '/vendor/phpuri.php');
 require_once(__DIR__ . '/lib/admin.php');
 require_once(__DIR__ . '/lib/buttons.php');
-require_once(__DIR__ . '/lib/share-count.php');
 require_once(__DIR__ . '/lib/shortcode.php');
 
 function activation() {

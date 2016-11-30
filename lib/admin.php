@@ -22,7 +22,6 @@ function admin_assets(){
 
 function assets(){
   wp_enqueue_style('roots-share-buttons', plugins_url('/assets/styles/share-buttons.css', ROOTS_SHARE_FOLDER), array());
-  wp_enqueue_script('roots-share-buttons', plugins_url('/assets/scripts/share-buttons.js', ROOTS_SHARE_FOLDER), array('jquery'), true);
 }
 
 function settings_init() {
@@ -41,13 +40,6 @@ function settings_init() {
     'roots_share_buttons_buttons',
     __('Enable Buttons', 'roots_share_buttons'),
     __NAMESPACE__ . '\\control_buttons',
-    'roots_share_buttons',
-    'roots_share_buttons_configuration'
-  );
-  add_settings_field(
-    'roots_share_buttons_share_count',
-    __('Share Count', 'roots_share_buttons'),
-    __NAMESPACE__ . '\\control_share_count',
     'roots_share_buttons',
     'roots_share_buttons_configuration'
   );
@@ -98,7 +90,6 @@ function get_defaults() {
   return array(
     'buttons'              => array('twitter', 'facebook', 'google_plus', 'linkedin'),
     'button_order'         => array('twitter', 'facebook', 'google_plus', 'linkedin', 'pinterest'),
-    'share_count'          => array('disabled'),
     'post_types'           => array('post', 'page'),
     'archive_templates'    => array(),
     'single_templates'     => array()
@@ -121,7 +112,6 @@ function settings_sanitize($input) {
   $output = array(
     'buttons'              => array(),
     'button_order'         => array(),
-    'share_count'          => array(),
     'post_types'           => array(),
     'archive_templates'    => array(),
     'single_templates'     => array()
@@ -159,15 +149,6 @@ function settings_sanitize($input) {
     $output['button_order'] = $button_order;
   } else {
     $output['button_order'] = array();
-  }
-
-  if (isset($input['share_count'])) {
-    $options = get_toggles();
-    foreach ((array) $input['share_count'] as $option) {
-      if (array_key_exists($option, $options)) {
-        $output['share_count'][] = $option;
-      }
-    }
   }
 
   if (isset($input['archive_templates'])) {
@@ -266,19 +247,6 @@ function control_buttons() {
   print "\n" . '</ul>';
   print "\n" . '<span>Drag the buttons to determine the order they will be displayed on your blog</span>';
   print "\n" . '<input type="hidden" name="roots_share_buttons[button_order]" id="roots_share_buttons_button_order" value="' . implode(',', $settings['button_order']) . '">';
-}
-
-function control_share_count() {
-  $key = 'share_count';
-  $settings = get_settings();
-  $saved = get_setting($key);
-  print "\n" . '<fieldset>';
-  foreach (get_toggles() as $option => $label) {
-    $id = 'roots_share_buttons_' . $key . '_' . $option;
-    $checked = (in_array($option, $saved)) ? ' checked="checked"' : '';
-    print "\n" . '<label for="' . esc_attr($id) . '"><input' . $checked . ' id="' . esc_attr($id) . '" type="radio" name="roots_share_buttons[' . $key . '][]" value="' . esc_attr($option) . '"> ' . esc_html($label) . '</label><br>';
-  }
-  print "\n" . '</fieldset>';
 }
 
 function control_archive_templates() {

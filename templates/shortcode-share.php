@@ -2,20 +2,11 @@
   $settings = \Roots\ShareButtons\Admin\get_settings();
 
   global $post;
-  $shares = '';
   if (empty($url)) $url = get_permalink();
 
   $thumb_id = get_post_thumbnail_id($post->ID);
 
   if (empty($title)) $title = get_the_title();
-
-  if (in_array('enabled', $settings['share_count'])) {
-    $shares           = new \Roots\ShareButtons\ShareCount\shareCount($url);
-    $shares_fb        = $shares->get_fb();
-    $shares_gplus     = $shares->get_plusones();
-    $shares_linkedin  = $shares->get_linkedin();
-    $shares_pinterest = $shares->get_pinterest();
-  }
 ?>
 
 <div class="entry-share">
@@ -26,9 +17,15 @@
           case 'twitter':
             if (in_array('twitter', $settings['buttons'])) : ?>
               <li class="entry-share-btn entry-share-btn-twitter">
-                <a href="https://twitter.com/intent/tweet?text=<?php echo urlencode(html_entity_decode($title, ENT_COMPAT, 'UTF-8')); ?>&amp;url=<?php echo urlencode($url); ?>" title="<?php _e('Share on Twitter', 'roots_share_buttons'); ?>">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 64 64"><path d="M64 12.15c-2.355 1.045-4.885 1.75-7.54 2.068 2.71-1.625 4.792-4.198 5.772-7.264-2.537 1.505-5.347 2.597-8.338 3.186-2.395-2.552-5.808-4.146-9.584-4.146-7.25 0-13.13 5.88-13.13 13.13 0 1.03.116 2.03.34 2.992-10.912-.548-20.588-5.775-27.064-13.72-1.13 1.94-1.778 4.196-1.778 6.602 0 4.556 2.318 8.575 5.84 10.93-2.15-.07-4.176-.66-5.946-1.643v.165c0 6.362 4.525 11.668 10.532 12.875-1.102.3-2.262.46-3.46.46-.845 0-1.668-.082-2.47-.235 1.672 5.216 6.52 9.013 12.267 9.118-4.493 3.522-10.154 5.62-16.306 5.62-1.06 0-2.105-.06-3.132-.183 5.81 3.726 12.713 5.9 20.128 5.9 24.15 0 37.358-20.008 37.358-37.36 0-.568-.013-1.135-.038-1.698 2.566-1.85 4.792-4.164 6.552-6.797z" fill="#fff"></path></svg>
-                  <b><?php _e('Tweet', 'roots_share_buttons'); ?></b>
+                <a href="https://twitter.com/intent/tweet?text=<?php echo urlencode(html_entity_decode($title, ENT_COMPAT, 'UTF-8')); ?>&amp;url=<?php echo urlencode($url); ?>" title="<?php _e('Share on Twitter', 'roots_share_buttons'); ?>" target="_blank">
+                  <div>
+                  <div class="entry-share-btn-icon" aria-hidden="true">
+                    <svg version="1.1" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+                      <g><path d="M23.444,4.834c-0.814,0.363-1.5,0.375-2.228,0.016c0.938-0.562,0.981-0.957,1.32-2.019c-0.878,0.521-1.851,0.9-2.886,1.104 C18.823,3.053,17.642,2.5,16.335,2.5c-2.51,0-4.544,2.036-4.544,4.544c0,0.356,0.04,0.703,0.117,1.036 C8.132,7.891,4.783,6.082,2.542,3.332C2.151,4.003,1.927,4.784,1.927,5.617c0,1.577,0.803,2.967,2.021,3.782 C3.203,9.375,2.503,9.171,1.891,8.831C1.89,8.85,1.89,8.868,1.89,8.888c0,2.202,1.566,4.038,3.646,4.456 c-0.666,0.181-1.368,0.209-2.053,0.079c0.579,1.804,2.257,3.118,4.245,3.155C5.783,18.102,3.372,18.737,1,18.459 C3.012,19.748,5.399,20.5,7.966,20.5c8.358,0,12.928-6.924,12.928-12.929c0-0.198-0.003-0.393-0.012-0.588 C21.769,6.343,22.835,5.746,23.444,4.834z"/></g>
+                    </svg>
+                  </div>
+                  <span><?php _e('Twitter', 'roots_share_buttons'); ?></span>
+                </div>
                 </a>
               </li>
             <?php endif;
@@ -36,12 +33,13 @@
           case 'facebook':
             if (in_array('facebook', $settings['buttons'])) : ?>
               <li class="entry-share-btn entry-share-btn-facebook">
-                <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode($url); ?>" title="<?php _e('Share on Facebook', 'roots_share_buttons'); ?>">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 64 64"><path d="M42 12c-5.523 0-10 4.477-10 10v6h-8v8h8v28h8V36h9l2-8H40v-6c0-1.105.895-2 2-2h10v-8H42z" fill="#fff"></path></svg>
-                  <b><?php _e('Share', 'roots_share_buttons'); ?></b>
-                  <?php if ($shares) : ?>
-                    <span class="count"><?php echo $shares_fb; ?></span>
-                  <?php endif; ?>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode($url); ?>" title="<?php _e('Share on Facebook', 'roots_share_buttons'); ?>" target="_blank">
+                  <div class="entry-share-btn-icon" aria-hidden="true">
+                    <svg version="1.1" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+                      <g><path d="M18.768,7.465H14.5V5.56c0-0.896,0.594-1.105,1.012-1.105s2.988,0,2.988,0V0.513L14.171,0.5C10.244,0.5,9.5,3.438,9.5,5.32 v2.145h-3v4h3c0,5.212,0,12,0,12h5c0,0,0-6.85,0-12h3.851L18.768,7.465z"/></g>
+                    </svg>
+                  </div>
+                  <span><?php _e('Facebook', 'roots_share_buttons'); ?></span>
                 </a>
               </li>
             <?php endif;
@@ -49,12 +47,11 @@
           case 'google_plus':
             if (in_array('google_plus', $settings['buttons'])) : ?>
               <li class="entry-share-btn entry-share-btn-google-plus">
-                <a href="https://plus.google.com/share?url=<?php echo urlencode($url); ?>" title="<?php _e('Share on Google+', 'roots_share_buttons'); ?>">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 64 64"><path d="M34.942 4H18.196C10.688 4 3.623 9.688 3.623 16.276c0 6.733 5.118 12.167 12.755 12.167.53 0 1.047-.01 1.553-.047-.495.95-.85 2.018-.85 3.128 0 1.87 1.007 3.388 2.28 4.627-.962 0-1.89.03-2.903.03C7.157 36.18 0 42.1 0 48.242c0 6.05 7.847 9.832 17.147 9.832 10.602 0 16.457-6.015 16.457-12.064 0-4.85-1.43-7.754-5.855-10.882-1.515-1.072-4.41-3.677-4.41-5.21 0-1.794.513-2.678 3.215-4.79 2.77-2.163 4.73-5.205 4.73-8.744 0-4.213-1.876-8.32-5.398-9.673h5.31l3.748-2.708zm-5.85 40.966c.134.56.206 1.138.206 1.727 0 4.888-3.15 8.707-12.186 8.707-6.428 0-11.07-4.07-11.07-8.956 0-4.79 5.758-8.778 12.185-8.708 1.5.016 2.898.257 4.167.668 3.49 2.427 5.992 3.798 6.698 6.563zm-10.29-18.23c-4.316-.13-8.416-4.827-9.16-10.49-.745-5.668 2.148-10.004 6.462-9.875 4.313.13 8.415 4.677 9.16 10.342s-2.15 10.154-6.462 10.024zM52 16V4h-4v12H36v4h12v12h4V20h12v-4z" fill="#fff"></path></svg>
-                  <b><?php _e('+1', 'roots_share_buttons'); ?></b>
-                  <?php if ($shares) : ?>
-                    <span class="count"><?php echo $shares_gplus; ?></span>
-                  <?php endif; ?>
+                <a href="https://plus.google.com/share?url=<?php echo urlencode($url); ?>" title="<?php _e('Share on Google+', 'roots_share_buttons'); ?>" target="_blank">
+                  <div class="entry-share-btn-icon" aria-hidden="true">
+                    <svg version="1.1" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve"><g><path d="M11.366,12.928c-0.729-0.516-1.393-1.273-1.404-1.505c0-0.425,0.038-0.627,0.988-1.368 c1.229-0.962,1.906-2.228,1.906-3.564c0-1.212-0.37-2.289-1.001-3.044h0.488c0.102,0,0.2-0.033,0.282-0.091l1.364-0.989 c0.169-0.121,0.24-0.338,0.176-0.536C14.102,1.635,13.918,1.5,13.709,1.5H7.608c-0.667,0-1.345,0.118-2.011,0.347 c-2.225,0.766-3.778,2.66-3.778,4.605c0,2.755,2.134,4.845,4.987,4.91c-0.056,0.22-0.084,0.434-0.084,0.645 c0,0.425,0.108,0.827,0.33,1.216c-0.026,0-0.051,0-0.079,0c-2.72,0-5.175,1.334-6.107,3.32C0.623,17.06,0.5,17.582,0.5,18.098 c0,0.501,0.129,0.984,0.382,1.438c0.585,1.046,1.843,1.861,3.544,2.289c0.877,0.223,1.82,0.335,2.8,0.335 c0.88,0,1.718-0.114,2.494-0.338c2.419-0.702,3.981-2.482,3.981-4.538C13.701,15.312,13.068,14.132,11.366,12.928z M3.66,17.443 c0-1.435,1.823-2.693,3.899-2.693h0.057c0.451,0.005,0.892,0.072,1.309,0.2c0.142,0.098,0.28,0.192,0.412,0.282 c0.962,0.656,1.597,1.088,1.774,1.783c0.041,0.175,0.063,0.35,0.063,0.519c0,1.787-1.333,2.693-3.961,2.693 C5.221,20.225,3.66,19.002,3.66,17.443z M5.551,3.89c0.324-0.371,0.75-0.566,1.227-0.566l0.055,0 c1.349,0.041,2.639,1.543,2.876,3.349c0.133,1.013-0.092,1.964-0.601,2.544C8.782,9.589,8.363,9.783,7.866,9.783H7.865H7.844 c-1.321-0.04-2.639-1.6-2.875-3.405C4.836,5.37,5.049,4.462,5.551,3.89z"/><polygon points="23.5,9.5 20.5,9.5 20.5,6.5 18.5,6.5 18.5,9.5 15.5,9.5 15.5,11.5 18.5,11.5 18.5,14.5 20.5,14.5 20.5,11.5  23.5,11.5"/></g></svg>
+                  </div>
+                  <span><?php _e('Google+', 'roots_share_buttons'); ?></span>
                 </a>
               </li>
             <?php endif;
@@ -62,12 +59,13 @@
           case 'linkedin':
             if (in_array('linkedin', $settings['buttons'])) : ?>
               <li class="entry-share-btn entry-share-btn-linkedin">
-                <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=<?php echo urlencode($url); ?>&amp;summary=" title="<?php _e('Share on LinkedIn', 'roots_share_buttons'); ?>">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 64 64"><path d="M53.25 0h-42.5C4.838 0 0 4.838 0 10.75v42.5C0 59.163 4.838 64 10.75 64h42.5C59.163 64 64 59.163 64 53.25v-42.5C64 4.838 59.163 0 53.25 0zM24 52h-8V24h8v28zm-4-32c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm32 32h-8V36c0-2.21-1.79-4-4-4s-4 1.79-4 4v16h-8V24h8v4.967C37.65 26.7 40.172 24 43 24c4.97 0 9 4.477 9 10v18z" fill="#fff"></path></svg>
-                  <b><?php _e('Share', 'roots_share_buttons'); ?></b>
-                  <?php if ($shares) : ?>
-                    <span class="count"><?php echo $shares_linkedin; ?></span>
-                  <?php endif; ?>
+                <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=<?php echo urlencode($url); ?>&amp;summary=" title="<?php _e('Share on LinkedIn', 'roots_share_buttons'); ?>" target="_blank">
+                  <div class="entry-share-btn-icon" aria-hidden="true">
+                    <svg version="1.1" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+                      <g><path d="M6.527,21.5h-5v-13h5V21.5z M4.018,6.5H3.988C2.478,6.5,1.5,5.318,1.5,4.019c0-1.329,1.008-2.412,2.547-2.412 c1.541,0,2.488,1.118,2.519,2.447C6.565,5.354,5.588,6.5,4.018,6.5z M15.527,12.5c-1.105,0-2,0.896-2,2v7h-5c0,0,0.059-12,0-13h5 v1.485c0,0,1.548-1.443,3.938-1.443c2.962,0,5.062,2.144,5.062,6.304V21.5h-5v-7C17.527,13.396,16.632,12.5,15.527,12.5z"/></g>
+                    </svg>
+                  </div>
+                  <span><?php _e('LinkedIn', 'roots_share_buttons'); ?></span>
                 </a>
               </li>
             <?php endif;
@@ -89,12 +87,13 @@
 
             if (in_array('pinterest', $settings['buttons'])) : ?>
               <li class="entry-share-btn entry-share-btn-pinterest">
-                <a href="https://pinterest.com/pin/create/button/?url=<?php echo urlencode($url); ?>&amp;media=<?php echo urlencode($thumb_src); ?>&amp;description=<?php echo urlencode($description); ?>" title="<?php _e('Share on Pinterest', 'roots_share_buttons'); ?>">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 64 64"><path d="M32 0C14.327 0 0 14.327 0 32c0 13.557 8.434 25.135 20.338 29.798-.28-2.532-.532-6.415.11-9.18.582-2.497 3.754-15.906 3.754-15.906s-.957-1.916-.957-4.75c0-4.45 2.58-7.77 5.79-7.77 2.73 0 4.05 2.05 4.05 4.507 0 2.744-1.75 6.85-2.65 10.653-.755 3.186 1.596 5.784 4.737 5.784 5.688 0 10.06-5.998 10.06-14.654 0-7.662-5.505-13.02-13.367-13.02-9.105 0-14.45 6.83-14.45 13.888 0 2.75 1.06 5.7 2.382 7.304.26.317.3.595.222.917-.244 1.012-.784 3.186-.89 3.63-.14.587-.464.71-1.07.43-3.997-1.862-6.495-7.705-6.495-12.398 0-10.094 7.334-19.365 21.143-19.365 11.1 0 19.727 7.91 19.727 18.482 0 11.028-6.953 19.903-16.605 19.903-3.243 0-6.29-1.685-7.334-3.675 0 0-1.605 6.11-1.993 7.607-.723 2.78-2.673 6.264-3.978 8.39C25.52 63.5 28.7 64 32 64c17.673 0 32-14.326 32-32S49.673 0 32 0z" fill="#fff"></path></svg>
-                  <b><?php _e('Pin it', 'roots_share_buttons'); ?></b>
-                  <?php if ($shares) : ?>
-                    <span class="count"><?php echo $shares_pinterest; ?></span>
-                  <?php endif; ?>
+                <a href="https://pinterest.com/pin/create/button/?url=<?php echo urlencode($url); ?>&amp;media=<?php echo urlencode($thumb_src); ?>&amp;description=<?php echo urlencode($description); ?>" title="<?php _e('Share on Pinterest', 'roots_share_buttons'); ?>" target="_blank">
+                  <div class="entry-share-btn-icon" aria-hidden="true">
+                    <svg version="1.1" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+                      <path d="M12.137,0.5C5.86,0.5,2.695,5,2.695,8.752c0,2.272,0.8 ,4.295,2.705,5.047c0.303,0.124,0.574,0.004,0.661-0.33 c0.062-0.231,0.206-0.816,0.271-1.061c0.088-0.331,0.055-0.446-0.19-0.736c-0.532-0.626-0.872-1.439-0.872-2.59 c0-3.339,2.498-6.328,6.505-6.328c3.548,0,5.497,2.168,5.497,5.063c0,3.809-1.687,7.024-4.189,7.024 c-1.382,0-2.416-1.142-2.085-2.545c0.397-1.675,1.167-3.479,1.167-4.688c0-1.081-0.58-1.983-1.782-1.983 c-1.413,0-2.548,1.461-2.548,3.42c0,1.247,0.422,2.09,0.422,2.09s-1.445,6.126-1.699,7.199c-0.505,2.137-0.076,4.756-0.04,5.02 c0.021,0.157,0.224,0.195,0.314,0.078c0.13-0.171,1.813-2.25,2.385-4.325c0.162-0.589,0.929-3.632,0.929-3.632 c0.459,0.876,1.801,1.646,3.228,1.646c4.247,0,7.128-3.871,7.128-9.053C20.5,4.15,17.182,0.5,12.137,0.5z"/>
+                    </svg>
+                  </div>
+                  <span><?php _e('Pinterest', 'roots_share_buttons'); ?></span>
                 </a>
               </li>
             <?php endif;

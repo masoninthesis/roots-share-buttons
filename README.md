@@ -1,6 +1,6 @@
 # Roots Share Buttons
 
-Add lightweight social sharing buttons with optional share counts.
+Add lightweight social sharing buttons.
 
 ## Requirements
 
@@ -10,9 +10,7 @@ Add lightweight social sharing buttons with optional share counts.
 
 * Supported networks: Facebook, Twitter, Google+, LinkedIn, Pinterest
 * Easily set button order
-* Enable share counts
 * Lightweight, mobile-first stylesheet
-* Lightweight JavaScript function to pop-up a window when a button is clicked
 * Automatically include share buttons:
   * Before and/or after content on archive templates
   * Before and/or after content on single templates
@@ -34,9 +32,9 @@ function custom_roots_share_buttons_template() {
 add_action('roots/share_template', 'custom_roots_share_buttons_template');
 ```
 
-## Removing plugin assets
+## Removing plugin CSS
 
-Roots Share Buttons includes one stylesheet and one JavaScript file. If you'd prefer to implement these assets within your theme (which is recommended), you can remove the plugin assets with this snippet:
+Roots Share Buttons includes one stylesheet. If you'd prefer to implement these styles within your theme (which is recommended), you can remove the plugin assets with this snippet:
 
 ```php
 /**
@@ -44,7 +42,6 @@ Roots Share Buttons includes one stylesheet and one JavaScript file. If you'd pr
  */
 function remove_roots_share_buttons_assets() {
   wp_dequeue_style('roots-share-buttons');
-  wp_dequeue_script('roots-share-buttons');
 }
 add_action('wp_enqueue_scripts', 'remove_roots_share_buttons_assets');
 ```

@@ -1,3 +1,8 @@
+# 1.2.0: September 4th, 2016
+* Remove share counts completely
+* Remove JS for window popup
+* Refactor CSS and update SVG icons
+
 # 1.1.0: November 23rd, 2015
 * Remove Twitter share counts as they're [no longer supported by Twitter](https://twittercommunity.com/t/clarification-about-share-counts-for-the-new-tweet-button/52868)
 
