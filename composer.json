@@ -1,5 +1,5 @@
 {
-  "name": "rangitm/roots-share-buttons",
+  "name": "masoninthesis/roots-share-buttons",
   "description": "Roots share buttons for Composer",
   "type": "wordpress-plugin",
   "license": "GPL-3.0",
@@ -7,7 +7,7 @@
   "repositories": [
     {
       "type": "vcs",
-      "url": "git@github.com:rangiTM/roots-share-buttons.git"
+      "url": "git@github.com:masoninthesis/roots-share-buttons.git"
     }
   ],
   "require": {
